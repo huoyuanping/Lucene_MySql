@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+ 	$(function(){
+		$("#serachButton").click(function(){
+			$.ajax({
+				url:'searchFood',
+				data:'keyWord='+$("input[name='keyWord']").val(),
+				dataType:'json',
+				success:function(jd){
+					$("div[name='c']").remove()
+					for(var i=0;i<jd.length;i++){
+						var html="<div name='c'>"+
+						"<h3>"+jd[i].foodname+"</h3>"+
+						"<span>"+jd[i].foodname+"价格是："+jd[i].price+"</span>"+
+						"<hr>"+
+						"</div> ";
+						$("#foodDiv").append(html);
+					}
+				}
+			})
+		})
+	}) 
+
+</script>
+</head>
+<body>
+	<div>
+		<img src="1.png"><br/>
+		<input type="text" name="keyWord" style="border:1px solid #D3D3D3;width: 200px;height: 25px">
+		<input id="serachButton" type="button" value="开始搜索" style="background-color: #3D8BFF;color: white; border: 0px;height: 27px" />
+		<div id="foodDiv">
+			
+		</div>
+		
+	</div>
+</body>
+</html>
